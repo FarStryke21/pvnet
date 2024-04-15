@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.0.3-devel-ubuntu16.04
+FROM nvidia/cuda:11.2.2-devel-ubuntu16.04
 # NOTE: build this image from dir above Dockerfile location
 # USE BASH
 SHELL ["/bin/bash", "-c"]
@@ -56,7 +56,28 @@ RUN cd /home/$username \
 RUN cd /home/$username/pvnet \
     && conda create -n pvnet python=3.6.7
 
-RUN pip install -r /home/$username/pvnet/requirements.txt
+# RUN conda init
+
+# RUN source ~/.bashrc
+
+# RUN conda activate pvnet
+
+# RUN python3 --version
+
+RUN source activate pvnet && cd /home/$username/pvnet && pip3 install scipy==1.2.1 \
+opencv_contrib_python==3.4.2.16 \
+matplotlib==3.0.2 \
+transforms3d==0.3.1 \
+scikit_image==0.13.1 \
+lmdb==0.94 \
+torch==1.4.0 \
+setuptools==39.1.0 \
+cffi==1.11.5 \
+torchvision==0.2.1 \
+easydict==1.7 \
+numpy==1.18.0 \
+plyfile==0.6 \
+&& python3 --version
 
 # follow remainder of steps in README
 RUN source activate pvnet \
