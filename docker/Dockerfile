@@ -54,7 +54,7 @@ RUN cd /home/$username \
 
 # Create Enviroment
 RUN cd /home/$username/pvnet \
-    && conda env create -n pvnet python=3.6.7
+    && conda create -n pvnet python=3.6.7
 
 RUN pip install -r /home/$username/pvnet/requirements.txt
 
