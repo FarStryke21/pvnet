@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-devel-ubuntu16.04
+FROM nvidia/cuda:11.0.3-devel-ubuntu16.04
 # NOTE: build this image from dir above Dockerfile location
 # USE BASH
 SHELL ["/bin/bash", "-c"]
@@ -54,7 +54,9 @@ RUN cd /home/$username \
 
 # Create Enviroment
 RUN cd /home/$username/pvnet \
-    && conda env create -f environment.yml
+    && conda env create -n pvnet
+
+RUN pip install -r /home/$username/pvnet/requirements.txt
 
 # follow remainder of steps in README
 RUN source activate pvnet \
